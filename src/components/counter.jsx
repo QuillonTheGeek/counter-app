@@ -80,13 +80,6 @@ import React, { Component } from "react";
 import Counters from "./counters";
 
 export class Counter extends Component {
-  state = {
-    value: this.props.counter.value,
-  };
-  styles = {
-    fontSize: 30,
-    fontWeight: "bold",
-  };
   //   constructor() {
   //     super();
   //     this.handleIncrement = this.handleIncrement.bind(this);
@@ -106,7 +99,7 @@ export class Counter extends Component {
           {this.formatCount()}
         </span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -123,12 +116,12 @@ export class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    const { value } = this.state;
+    const { value } = this.props.counter;
     return value === 0 ? "zero" : value;
   }
 }
